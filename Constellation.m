@@ -2,26 +2,35 @@ classdef Constellation
     properties (SetAccess = private)
         symbols
         symbol_map
+        bits_per_symbol
     end
     methods
         function C = Constellation(type)
             switch type %Switch statements are long but they are fast :)
                 case 'BPSK'
                     [C.symbols, C.symbol_map] = C.BPSK();
+                    C.bits_per_symbol = 1;
                 case 'QPSK'
                     [C.symbols, C.symbol_map] = C.QPSK();
+                    C.bits_per_symbol = 2;
                 case '8PSK'
                     [C.symbols, C.symbol_map] = C.PSK_8();
+                    C.bits_per_symbol = 3;
                 case '16QAM'
                     [C.symbols, C.symbol_map] = C.QAM_16();
+                    C.bits_per_symbol = 4;
                 case '64QAM'
                     [C.symbols, C.symbol_map] = C.QAM_64();
+                    C.bits_per_symbol = 5;
                 case '8GRQAM'
                     [C.symbols, C.symbol_map] = C.GRQAM_k(8);
+                    C.bits_per_symbol = 3;
                 case '16GRQAM'
                     [C.symbols, C.symbol_map] = C.GRQAM_k(16);
+                    C.bits_per_symbol = 4;
                 case '64GRQAM'
                     [C.symbols, C.symbol_map] = C.GRQAM_k(64);
+                    C.bits_per_symbol = 5;
                 
                 otherwise
                     disp('Incorrect constellation type!')
